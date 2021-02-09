@@ -162,3 +162,73 @@ db.listingsAndReviews.find({
     'name': 1, 'beds': 1
 });
 ```
+
+# Answers to Hands On 1
+
+1. ```
+   db.companies.find({
+       'founded_year':2006
+   }, {
+       'name':1,
+       'founded_year':1
+   })
+   ```
+
+2. ```
+    db.companies.find({
+        'founded_year':{
+            '$gt': 2000
+        }
+    }, {
+        'name':1,
+        'founded_year':1
+    })
+    ```
+
+3. ```
+   db.companies.find({
+       'founded_year': {
+           '$gte':1900,
+           '$lte':2010
+       }
+   },{
+       'name': 1,
+       'founded_year': 1
+   });
+   ```
+
+4. ```
+    db.companies.find({
+        'ipo.valuation_amount':{
+            '$gt':100000000
+        }
+    },{
+        'name': 1,
+        'ipo.valuation_amount': 1,
+        'ipo.valuation_currency_code':1
+    }).pretty();
+    ```
+
+5.
+```
+db.companies.find({
+    'ipo.valuation_amount': {
+        '$gt':100000000
+    },
+    'ipo.valuation_currency_code':'USD'
+},{
+    'name': 1,
+    'ipo.valuation_amount':1,
+    'ipo.valuation_currency_code': 1
+}).pretty();
+```
+
+6. 
+```
+db.inspections.find({
+    'result':'Violation Issued'
+}, {
+    'business_name': 1,
+    'result': 1
+})
+```
