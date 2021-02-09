@@ -232,3 +232,62 @@ db.inspections.find({
     'result': 1
 })
 ```
+
+### Find by elements within array
+Find all listings that include 'Pets Allowed' in the array of amenities.
+
+```
+db.listingsAndReviews.find({
+    'amenities':'Pets allowed'
+},{
+    'name': 1,
+    'amenities': 1
+}).pretty()
+```
+
+Find all listings that have *both* 'Pets allowed'
+and 'Pets live on this property'
+
+```
+db.listingsAndReviews.find({
+    'amenities': {
+        '$all':['Pets allowed', 'Pets live on this property']
+    }
+},{
+    'name': 1,
+    'amenities':1
+}).pretty();
+```
+
+Find all listings that have either wifi or internet:
+
+```
+db.listingsAndReviews.find({
+    'amenities': {
+        '$in':['Wifi', 'Internet']
+    }
+}, {
+    'name': 1,
+    'amenities': 1
+}).pretty();
+```
+
+Find all listings that have been reviewed by the
+reviewer id: 6184569
+
+```
+db.listingsAndReviews.find({
+    'reviews': {
+        '$elemMatch': {
+            'reviewer_id': '6184569'
+        }
+    }
+}, {
+    'name':1,
+    'reviews': {
+        '$elemMatch': {
+            'reviewer_id': '6184569'
+        }
+    }
+}).limit(5).pretty();
+```
