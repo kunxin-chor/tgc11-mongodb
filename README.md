@@ -114,3 +114,51 @@ db.listingsAndReviews.find({
     'name':1, 'address.country':1, 'beds':1, 'bedrooms':1
 }).count()
 ```
+
+#### Find by Inequality
+
+* find all listings that have more than 3 beds
+
+```
+db.listingsAndReviews.find({
+    'beds': {
+        '$gt': 3
+    }
+},{
+    'name': 1, 'beds':1
+});
+```
+
+* find all listings that have 3 or more beds:
+```
+db.listingsAndReviews.find({
+    'beds': {
+        '$gte': 3
+    }
+},{
+    'name': 1, 'beds':1
+});
+```
+
+* find all listings that have less than 10 beds:
+```
+db.listingsAndReviews.find({
+    'beds':{
+        '$lt': 6
+    }
+},{
+  'name': 1, 'beds': 1
+});
+```
+
+* find all listings that have between 3 to 6 beds:
+```
+db.listingsAndReviews.find({
+    'beds':{
+        '$gte': 3,
+        '$lte': 6
+    }
+},{
+    'name': 1, 'beds': 1
+});
+```
