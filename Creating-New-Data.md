@@ -250,3 +250,56 @@ db.animals.update({
     }
 })
 ```
+
+## Hands on solution:
+
+```
+db.animals.insertMany([
+    {
+        "name" : "Jorden",
+        "age" : 15,
+        "breed" : "Golden Retriever",
+        "species" : "Dog"
+    },
+    {
+        "name" : "Dash",
+        "age" : 3,
+        "breed" : "Hamster",
+        "species": "Hamster"
+    },
+    {
+        "name" : "Carrot",
+        "age" : 1.5,
+        "breed" : "Australian Dwarf",
+        "species" : "Rabbit"
+    }
+])
+```
+
+```
+db.animals.update({
+    '_id':ObjectId("602380a6c06ce48e91e1b7ef")
+},{
+    '$set':{
+        'age':2.5
+    }
+})
+```
+
+```
+db.animals.update({
+    "_id" : ObjectId("602380a6c06ce48e91e1b7ee")
+},{
+    'name': 'Dash',
+    'age': 4.5,
+    'breed': 'Winter White',
+    'species': 'hamster' 
+})
+```
+
+```
+db.animals.remove(
+    {
+        '_id':ObjectId("602380a6c06ce48e91e1b7ed")
+})
+```
