@@ -130,3 +130,60 @@ db.students.remove({
     '_id':ObjectId("60234f4061da21d6e116d54e")
 });
 ```
+
+## Manage sub-documents
+
+Suppose we have a document that looks like this:
+
+```
+db.animals.insert({
+    'name':'Cookie',
+    'age': 1,
+    'breed':'Beagle',
+    'species':'Dog',
+    'tags':[
+        'playful', 'toilet-trained', 'good with cats'
+    ]
+})
+```
+
+### Push to the back of the tags array for Cookie
+```
+db.animals.update({
+    '_id':ObjectId("602358c861da21d6e116d54f")
+},{
+    '$push':{
+        'tags':'good with kids'
+    }
+})
+```
+
+### Remove 'good with cats' from the tags array for Cookie
+
+```
+db.animals.update({
+    '_id':ObjectId("602358c861da21d6e116d54f")
+},{
+    '$pull': {
+        'tags':'good with cats'
+    }
+})
+```
+
+### Updating sub-documents
+
+Imagine we add a sub-document to Cookie:
+
+```
+db.animals.update({
+    '_id':ObjectId("602358c861da21d6e116d54f"),
+},{
+    '$set': {
+        'vet': {
+            'name': 'Dr Linda Khoo',
+            'contact': 9999998,
+            'address':'Sunset Way Blk 3 #01-02'
+        }
+    }
+})
+```
