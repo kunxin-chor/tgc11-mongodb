@@ -17,7 +17,11 @@ db.sales.find({
     'couponUsed':true,
     'items':{
         '$elemMatch': {
-            'name':'pens'
+            '$or': [
+                {'name':'pens'}
+
+            ]
+            
         }
     }
 },{
