@@ -187,3 +187,66 @@ db.animals.update({
     }
 })
 ```
+
+Update Dr. Linda Khoo's name 'Dr. Linda Tan'.
+
+```
+db.animals.update({
+    '_id':ObjectId("602358c861da21d6e116d54f")
+}, {
+    '$set': {
+        'vet.name':'Dr Linda Tan'
+    }
+})
+```
+
+### Updating a specific object in an array 
+
+Assume that Cookie has a list of checkups that it has attended.
+
+```
+db.animals.update({
+     '_id':ObjectId("602358c861da21d6e116d54f")
+},{
+    '$set': {
+        'checkups': [
+            {
+                '_id':ObjectId(),
+                'diagnosis':'Inflammation',
+                'treatment':'Anti-inflammatory'
+            },
+            {
+                '_id':ObjectId(),
+                'diagnosis':'Seperation anxiety',
+                'treatment':'Anti-anxiety medication'
+            },
+            {
+                '_id':ObjectId(),
+                'diagnosis':'Needs to be fixed',
+                'treatment':'Neutering'
+            }
+        ]
+    }
+})
+```
+
+Update the checkup with seperation anxiety for the diagnosis,
+and change its diagnosis to "Seperation anxiety and depression"
+and the treatment to be "Anti-depressants".
+
+```
+// update the document that has inside it
+checkups array, the specified _id 
+db.animals.update({
+   'checkups': {
+       '$elemMatch':{
+           '_id':ObjectId("60235c5961da21d6e116d551")
+       }
+   }
+},{
+    '$set': {
+        'checkups.$.diagnosis':"Seperation anxiety and depression",
+        'checkups.$.treatment':"Anti-depressants"
+    }
+})
+```
